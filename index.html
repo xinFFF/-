@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中秋佳节</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #001f3f;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            text-align: center;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 3em;
+            color: #ff5733; /* 设置标题颜色为亮红色#ff5733 或金色#ffcc00 */
+            margin-bottom: 20px;
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .marquee {
+            display: inline-block;
+            animation: marquee 5s linear infinite;
+        }
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .moon {
+            width: 200px;
+            height: 200px;
+            background-color: #ffd700;  /* 设置moon颜色 #ffd700*/
+            border-radius: 50%;
+            box-shadow: 0 0 20px #ffd700; /* 设置moon颜色 #ffd700 */  
+            margin: 0 auto 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .crater {
+            position: absolute;
+            background-color: #e6c300;
+            border-radius: 50%;
+        }
+        .star {
+            position: absolute;
+            background-color: #fff;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+        }
+        #poem {
+            font-style: italic;
+            font-size: 1.5rem; /* 设置段落字体大小 */
+            margin-top: 20px;
+        }
+        .mooncake {
+            width: 100px;
+            height: 100px;
+            background-color: #d4a017;
+            border-radius: 50%;
+            position: relative;
+            margin: 20px; /* 适当的边距 */
+            box-shadow: inset 0 0 20px #b8860b;
+        }
+        .mooncake::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: #ffd700;
+            border-radius: 50%;
+            box-shadow: inset 0 0 10px #d4a017;
+        }
+        .mooncake::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #8b4513;
+        }
+        .mooncakes-container {
+            display: flex; /* Flex 布局 */
+            justify-content: center; /* 水平居中 */
+            margin-top: 20px; /* 增加顶边距 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="moon" id="moon"></div>
+        <h1 class="marquee">周亦颜小朋友，中秋节快乐呀！</h1>
+        <p id="poem">月圆人团圆，愿你与家人共度美好时光！(记得回来也要陪伴我哦！)</p>
+        <div class="mooncakes-container">
+            <div class="mooncake"></div> <!-- 月饼 -->
+            <div class="mooncake"></div> <!-- 月饼 -->
+        </div>
+    </div>
+ 
+    <script>
+        // 创建月球表面的陨石坑
+        function createCraters() {
+            const moon = document.getElementById('moon');
+            for (let i = 0; i < 10; i++) {
+                const crater = document.createElement('div');
+                crater.classList.add('crater');
+                crater.style.width = Math.random() * 30 + 10 + 'px';
+                crater.style.height = crater.style.width;
+                crater.style.top = Math.random() * 160 + 'px';
+                crater.style.left = Math.random() * 160 + 'px';
+                moon.appendChild(crater);
+            }
+        }
+ 
+        // 创建星星背景
+        function createStars() {
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.left = Math.random() * 100 + 'vw';
+                document.body.appendChild(star);
+            }
+        }
+ 
+        // 月亮晃动效果
+        function moonWobble() {
+            const moon = document.getElementById('moon');
+            setInterval(() => {
+                moon.style.transform = `translate(${Math.random() * 10 - 5}px, ${Math.random() * 10 - 5}px)`;
+            }, 1000);
+        }
+ 
+        // 初始化
+        createCraters();
+        createStars();
+        moonWobble();
+    </script>
+</body>
+</html>
